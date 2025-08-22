@@ -1,5 +1,6 @@
 package com.project.rateMyLearning.repository;
 
+import com.project.rateMyLearning.model.Review;
 import com.project.rateMyLearning.model.Reviewer;
 import com.project.rateMyLearning.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,7 @@ public interface ReviewerRepository extends JpaRepository<Reviewer, Integer> {
     List<Reviewer> user(User user);
     @Query("Select u from Reviewer u WHERE u.user.username = ?1")
     Reviewer getByUsername(String username);
+
+    @Query("Select r from Review r WHERE r.reviewer.user.username=?1")
+    List<Review> getReviewsByUsername(String name);
 }

@@ -12,6 +12,7 @@ public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String link;
     private String title;
     private String platform;
     private String thumbnailUrl;
@@ -26,6 +27,14 @@ public class Course {
     private String averageRating;
     @ManyToOne
     private Instructor instructor;
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public Instructor getInstructor() {
         return instructor;

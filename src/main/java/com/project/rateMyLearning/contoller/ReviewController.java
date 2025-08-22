@@ -3,6 +3,7 @@ package com.project.rateMyLearning.contoller;
 import com.project.rateMyLearning.dto.ReviewDto;
 import com.project.rateMyLearning.dto.ReviewerDto;
 import com.project.rateMyLearning.service.ReviewService;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,12 @@ public class ReviewController {
     @PostMapping("/api/review/add")
     public ResponseEntity<?> postReview(@RequestBody ReviewDto reviewDto, Principal principal){
         return ResponseEntity.status(HttpStatus.CREATED).body(reviewService.postReview(reviewDto, principal.getName()));
+    }
+
+    @GetMapping("/api/review/getReviews")
+    public ResponseEntity<?> getReviews(Principal principal){
+        return ResponseEntity.status(HttpStatus.OK).body(reviewService.getReviews(principal.getName()));
+
     }
 
 
