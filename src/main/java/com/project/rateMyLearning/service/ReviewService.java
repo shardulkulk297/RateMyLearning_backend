@@ -38,6 +38,7 @@ public class ReviewService {
         return reviewRepository.getAvgRating(name);
     }
 
+    //Posts review but before posting the review it makes sure that the review is already present or not
     public ReviewDto postReview(ReviewDto reviewDto, String username){
         Reviewer reviewer = reviewerRepository.getByUsername(username);
         Review review = reviewDto.getReview();
