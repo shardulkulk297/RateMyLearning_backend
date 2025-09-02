@@ -26,8 +26,16 @@ public class CourseService {
 
     public Course addCourse(Course course) {
         Instructor instructor = course.getInstructor();
-        instructor = instructorRepository.save(instructor);
-        course.setInstructor(instructor);
+        Instructor instructor1 = instructorRepository.findByInstructorDetails(instructor.getName(), instructor.getProfileUrl());
+        if(instructor1 ==null){
+            instructor = instructorRepository.save(instructor);
+        }
+
+        course.setInstructor(instructor1);
+        Course c = courseRepository.findByCourseTitle(course.getTitle(), course.getLink());
+        if(c != null){
+            return c;
+        }
         return courseRepository.save(course);
     }
 
