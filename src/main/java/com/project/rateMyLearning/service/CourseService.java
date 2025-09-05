@@ -32,13 +32,15 @@ public class CourseService {
         Instructor instructor1 = instructorRepository.findByInstructorDetails(instructor.getName(), instructor.getProfileUrl());
         if(instructor1 ==null){
             instructor = instructorRepository.save(instructor);
+            course.setInstructor(instructor);
             logger.info("New Instructor added successfully, this doesn't exist");
         }
         else{
+            course.setInstructor(instructor1);
             logger.info("Instructor already exist");
         }
 
-        course.setInstructor(instructor1);
+
         Course c = courseRepository.findByCourseTitle(course.getTitle(), course.getLink());
         if(c != null){
             logger.info("Course already exist");
