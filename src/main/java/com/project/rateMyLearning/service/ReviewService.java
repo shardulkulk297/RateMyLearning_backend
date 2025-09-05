@@ -3,10 +3,8 @@ package com.project.rateMyLearning.service;
 import com.project.rateMyLearning.dto.ReviewDto;
 import com.project.rateMyLearning.dto.ReviewerDto;
 import com.project.rateMyLearning.exception.ResourceNotFoundException;
-import com.project.rateMyLearning.model.Course;
-import com.project.rateMyLearning.model.Instructor;
-import com.project.rateMyLearning.model.Review;
-import com.project.rateMyLearning.model.Reviewer;
+import com.project.rateMyLearning.model.*;
+import com.project.rateMyLearning.repository.CourseReviewRepository;
 import com.project.rateMyLearning.repository.ReviewRepository;
 import com.project.rateMyLearning.repository.ReviewerRepository;
 import org.apache.coyote.BadRequestException;
@@ -22,12 +20,14 @@ public class ReviewService {
     private final CourseService courseService;
     private final ReviewerService reviewerService;
     private final ReviewerRepository reviewerRepository;
+    private final CourseReviewRepository courseReviewRepository;
 
-    public ReviewService(ReviewRepository reviewRepository, CourseService courseService, ReviewerService reviewerService, ReviewerRepository reviewerRepository) {
+    public ReviewService(ReviewRepository reviewRepository, CourseService courseService, ReviewerService reviewerService, ReviewerRepository reviewerRepository, CourseReviewRepository courseReviewRepository) {
         this.reviewRepository = reviewRepository;
         this.courseService = courseService;
         this.reviewerService = reviewerService;
         this.reviewerRepository = reviewerRepository;
+        this.courseReviewRepository = courseReviewRepository;
     }
 
     public int getTotalReviews(String name) {
@@ -59,6 +59,11 @@ public class ReviewService {
         reviewDto1.setReview(review);
         reviewDto1.setCourse(course);
 
+        CourseReview courseReview = new CourseReview();
+        courseReview.setReview(review);
+        courseReview.setCourse(course);
+
+        courseReviewRepository.save(courseReview);
         return reviewDto1;
     }
 

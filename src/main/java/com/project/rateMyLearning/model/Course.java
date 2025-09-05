@@ -27,6 +27,15 @@ public class Course {
     private String averageRating;
     @ManyToOne
     private Instructor instructor;
+    private int totalReviews;
+
+    public int getTotalReviews() {
+        return totalReviews;
+    }
+
+    public void setTotalReviews(int totalReviews) {
+        this.totalReviews = totalReviews;
+    }
 
     public String getLink() {
         return link;

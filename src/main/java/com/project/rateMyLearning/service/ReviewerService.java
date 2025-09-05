@@ -76,12 +76,12 @@ public class ReviewerService {
         /*
         Checking if the directory exists else create one
          */
-        String uploadFolder = "D:\\My Codes\\My Projects\\RateMyLearning.com\\public\\images";
+        String uploadFolder = "/home/shardul-kulkarni/My Projects/RateMyLearning.com/public/images";
         Files.createDirectories(Path.of(uploadFolder));
         /*
         Define Full Path
          */
-        Path path = Paths.get(uploadFolder, "\\", originalFileName);
+        Path path = Paths.get(uploadFolder, originalFileName);
         /*
         Upload file in mentioned Path, if already exisitng replace existing
          */

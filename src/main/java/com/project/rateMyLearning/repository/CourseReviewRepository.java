@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface CourseReviewRepository extends JpaRepository<CourseReview,Integer> {
     List<CourseReview> course(Course course);
-    @Query("Select c from CourseReview c WHERE c.course.title LIKE ?1 ORDER BY c.review.rating desc")
+    @Query("Select c.course, avg(c.review.rating) as avgRating from CourseReview c WHERE LOWER(c.course.title) LIKE LOWER(CONCAT('%', ?1 , '%')) GROUP BY c.course ORDER BY avgRating DESC")
     List<CourseReview> searchCourses(String courseName);
 }
