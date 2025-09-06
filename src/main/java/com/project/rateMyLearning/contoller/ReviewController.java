@@ -41,6 +41,10 @@ public class ReviewController {
 
     }
 
+    @GetMapping("/api/review/getReviewsForCourse/{courseId}")
+    public ResponseEntity<?> getReviewsForCourse(Principal principal, @PathVariable("courseId") int courseId){
+        return ResponseEntity.status(HttpStatus.OK).body(reviewService.getReviewsForCourse(courseId));
+    }
 
 
 }

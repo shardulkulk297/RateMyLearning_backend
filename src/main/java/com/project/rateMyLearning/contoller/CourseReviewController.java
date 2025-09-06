@@ -4,9 +4,7 @@ import com.project.rateMyLearning.service.CourseReviewService;
 import com.project.rateMyLearning.service.CourseService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CourseReviewController {
@@ -19,8 +17,8 @@ public class CourseReviewController {
         this.courseReviewService = courseReviewService;
     }
 
-    @GetMapping("/api/course/review/search")
-    public ResponseEntity<?> searchCourse(String courseName){
+    @GetMapping("/api/course/review/search/{courseName}")
+    public ResponseEntity<?> searchCourse(@PathVariable String courseName){
         return ResponseEntity.status(HttpStatus.OK).body(courseReviewService.searchCourse(courseName));
     }
 

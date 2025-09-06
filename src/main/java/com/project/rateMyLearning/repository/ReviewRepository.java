@@ -17,4 +17,10 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     Review getReviewByLink(String link, String username);
     @Query("Select r from Review r WHERE r.course.title LIKE ?1 ORDER BY r.rating DESC")
     List<Review> getReviewsByCourse(String courseTitle);
+    @Query("Select count(r) from Review r WHERE r.course.id = ?1")
+    int getTotalReviewsForCourse(int courseId);
+    @Query("Select avg(r.rating) from Review r WHERE r.course.id=?1")
+    int getAvgRatingForCourse(int courseId);
+    @Query("Select r from Review r WHERE r.course.id = ?1")
+    List<Review> getReviewsForCourse(int id);
 }

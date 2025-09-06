@@ -80,6 +80,10 @@ public class ReviewService {
         return reviews;
     }
 
+    public List<Review> getReviewsForCourse(int courseId) {
+        return reviewRepository.getReviewsForCourse(courseId);
+    }
+
 //    public ReviewDto updateReview(Review review){
 //        if(review.getReviewer())
 //        {
