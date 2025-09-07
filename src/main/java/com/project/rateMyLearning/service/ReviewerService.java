@@ -94,4 +94,30 @@ public class ReviewerService {
     }
 
 
+    public Reviewer updateReviewer(Reviewer reviewer, String username) {
+
+        Reviewer savedCustomer =  reviewerRepository.getByUsername(username);
+
+        if(reviewer.getName()!=null){
+            savedCustomer.setName(reviewer.getName());
+        }
+        if(reviewer.getEmail()!=null){
+            savedCustomer.setEmail(reviewer.getEmail());
+        }
+        if(reviewer.getBio()!=null){
+            savedCustomer.setBio(reviewer.getBio());
+        }
+        if(reviewer.getProfilePic()!=null){
+            savedCustomer.setProfilePic(reviewer.getProfilePic());
+        }
+        if(reviewer.getContact()!=null){
+            savedCustomer.setContact(reviewer.getContact());
+        }
+
+        return reviewerRepository.save(savedCustomer);
+    }
+
+    public Reviewer getReviewer(String name) {
+        return reviewerRepository.getByUsername(name);
+    }
 }
