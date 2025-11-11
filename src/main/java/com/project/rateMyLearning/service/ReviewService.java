@@ -7,7 +7,11 @@ import com.project.rateMyLearning.model.*;
 import com.project.rateMyLearning.repository.CourseReviewRepository;
 import com.project.rateMyLearning.repository.ReviewRepository;
 import com.project.rateMyLearning.repository.ReviewerRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.coyote.BadRequestException;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +25,12 @@ public class ReviewService {
     private final ReviewerService reviewerService;
     private final ReviewerRepository reviewerRepository;
     private final CourseReviewRepository courseReviewRepository;
+
+
+    @Autowired
+    private HttpServletRequest request;
+
+
 
     public ReviewService(ReviewRepository reviewRepository, CourseService courseService, ReviewerService reviewerService, ReviewerRepository reviewerRepository, CourseReviewRepository courseReviewRepository) {
         this.reviewRepository = reviewRepository;
@@ -63,6 +73,16 @@ public class ReviewService {
         courseReview.setReview(review);
         courseReview.setCourse(course);
 
+
+        int reviewsFromSingleDeviceForSingleCourseLimit = 2;
+        String clientIp = request.getRemoteAddr();
+        review.setIpAddress(clientIp);
+        int count = reviewRepository.getReviewCountFromIp(course.getId(), clientIp);
+        if(count > reviewsFromSingleDeviceForSingleCourseLimit){
+            throw new RuntimeException("You cannot give reviews for this course, you have reached your limit");
+        }
+
+        
         courseReviewRepository.save(courseReview);
         return reviewDto1;
     }

@@ -6,12 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
+=======
+        <module name="RateMyLearning_backend-main" />
+>>>>>>> 8136dcb (Added account creation and review posting limit in both addReviewer Method and postReview method so that there is no spoofing of the reviews)
         <module name="rateMyLearning" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+<<<<<<< HEAD
+=======
+      <module name="RateMyLearning_backend-main" options="-parameters" />
+>>>>>>> 8136dcb (Added account creation and review posting limit in both addReviewer Method and postReview method so that there is no spoofing of the reviews)
       <module name="rateMyLearning" options="-parameters" />
     </option>
   </component>

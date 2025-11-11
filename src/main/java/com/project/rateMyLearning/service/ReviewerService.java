@@ -7,6 +7,10 @@ import com.project.rateMyLearning.model.User;
 import com.project.rateMyLearning.model.enums.Role;
 import com.project.rateMyLearning.repository.ReviewerRepository;
 import com.project.rateMyLearning.repository.UserRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +26,9 @@ public class ReviewerService {
     private final UserService userService;
     private final UserRepository userRepository;
     private final ReviewerRepository reviewerRepository;
+
+    @Autowired
+    private HttpServletRequest request;
 
     public ReviewerService(UserService userService, UserRepository userRepository, ReviewerRepository reviewerRepository) {
         this.userService = userService;
@@ -43,6 +50,21 @@ public class ReviewerService {
         user = userService.signUp(user);
         reviewer.setUser(user);
         reviewer.setReputationScore(1);
+
+
+        String clientIp = request.getRemoteAddr();
+        reviewer.setIpAddress(clientIp);
+
+        int reviewerAcCreationLimit = 2;
+        int count = reviewerRepository.getReviewerIpCount(clientIp);
+
+        if(count > reviewerAcCreationLimit){
+            throw new RuntimeException("You cannot create more than two accounts from the same machine!!");
+        }
+
+        
+
+
         return reviewerRepository.save(reviewer);
     }
 

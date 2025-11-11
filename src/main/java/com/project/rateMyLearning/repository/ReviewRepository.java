@@ -23,4 +23,10 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     int getAvgRatingForCourse(int courseId);
     @Query("Select r from Review r WHERE r.course.id = ?1")
     List<Review> getReviewsForCourse(int id);
+<<<<<<< HEAD
+=======
+
+    @Query("Select COUNT(r) from Review r WHERE r.course.id = ?1 AND r.ipAddress = ?2")
+    int getReviewCountFromIp(int id, String clientIp);
+>>>>>>> 8136dcb (Added account creation and review posting limit in both addReviewer Method and postReview method so that there is no spoofing of the reviews)
 }
