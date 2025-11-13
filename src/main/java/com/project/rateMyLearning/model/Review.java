@@ -19,8 +19,7 @@ public class Review {
     @ManyToOne
     private Course course;
 
-<<<<<<< HEAD
-=======
+
     private String ipAddress;
 
     public String getIpAddress() {
@@ -31,7 +30,7 @@ public class Review {
         this.ipAddress = ipAddress;
     }
 
->>>>>>> 8136dcb (Added account creation and review posting limit in both addReviewer Method and postReview method so that there is no spoofing of the reviews)
+
     public int getId() {
         return id;
     }

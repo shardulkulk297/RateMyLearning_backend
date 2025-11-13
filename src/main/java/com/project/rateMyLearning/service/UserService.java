@@ -37,7 +37,7 @@ public class UserService {
             throw new ResourceNotFoundException("Invalid Credentials");
         }
         switch(user.getRole()){
-            case Role.REVIEWER ->
+            case REVIEWER ->
             {
                 Reviewer reviewer = reviewerRepository.getByUsername(username);
                 ReviewerDto reviewerDto = new ReviewerDto();

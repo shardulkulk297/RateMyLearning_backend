@@ -3,6 +3,7 @@ package com.project.rateMyLearning.contoller;
 import com.project.rateMyLearning.model.User;
 import com.project.rateMyLearning.service.UserService;
 import com.project.rateMyLearning.utility.JwtUtil;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class UserController {
     }
 
     @GetMapping("/api/user/getToken")
+    @SecurityRequirement(name = "basicAuth")
     public ResponseEntity<?> getToken(Principal principal){
         JwtUtil jwtUtil = new JwtUtil();
         try{

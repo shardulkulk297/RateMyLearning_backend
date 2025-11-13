@@ -78,11 +78,12 @@ public class ReviewService {
         String clientIp = request.getRemoteAddr();
         review.setIpAddress(clientIp);
         int count = reviewRepository.getReviewCountFromIp(course.getId(), clientIp);
+
         if(count > reviewsFromSingleDeviceForSingleCourseLimit){
             throw new RuntimeException("You cannot give reviews for this course, you have reached your limit");
         }
 
-        
+
         courseReviewRepository.save(courseReview);
         return reviewDto1;
     }

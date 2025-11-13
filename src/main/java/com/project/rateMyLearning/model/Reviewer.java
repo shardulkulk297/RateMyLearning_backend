@@ -18,8 +18,6 @@ public class Reviewer {
     @Column(columnDefinition = "TEXT")
     private String bio;
     private int reputationScore;
-<<<<<<< HEAD
-=======
 
     private String ipAddress;
 
@@ -31,7 +29,7 @@ public class Reviewer {
         this.ipAddress = ipAddress;
     }
 
->>>>>>> 8136dcb (Added account creation and review posting limit in both addReviewer Method and postReview method so that there is no spoofing of the reviews)
+
     public int getId() {
         return id;
     }

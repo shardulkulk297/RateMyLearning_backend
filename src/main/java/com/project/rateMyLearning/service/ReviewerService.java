@@ -56,9 +56,10 @@ public class ReviewerService {
         reviewer.setIpAddress(clientIp);
 
         int reviewerAcCreationLimit = 2;
-        int count = reviewerRepository.getReviewerIpCount(clientIp);
+        Integer count = reviewerRepository.getReviewerIpCount(clientIp);
+        int c = count == null ? 0 : count;
 
-        if(count > reviewerAcCreationLimit){
+        if(c > reviewerAcCreationLimit){
             throw new RuntimeException("You cannot create more than two accounts from the same machine!!");
         }
 

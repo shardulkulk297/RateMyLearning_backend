@@ -20,11 +20,10 @@ public interface ReviewerRepository extends JpaRepository<Reviewer, Integer> {
 
     @Query("Select r from Review r WHERE r.reviewer.user.username=?1")
     List<Review> getReviewsByUsername(String name);
-<<<<<<< HEAD
-=======
 
 
-    @Query("Select r from Reviewer r WHERE r.ipAddress = ?1")
+
+    @Query("Select COUNT(r) from Reviewer r WHERE r.ipAddress = ?1")
     int getReviewerIpCount(String clientIp);
->>>>>>> 8136dcb (Added account creation and review posting limit in both addReviewer Method and postReview method so that there is no spoofing of the reviews)
+
 }
